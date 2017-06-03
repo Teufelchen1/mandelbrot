@@ -1,0 +1,22 @@
+<html>
+	<head>
+		<style type="text/css" >
+			canvas { border: 1px solid black; }
+			table { border: 1px solid black; }
+		</style>
+		<script src="mandelbrot.js"></script>
+	</head>
+	<h1>Mandelbrot</h1>
+	<canvas id="universe" width="500" height="500"></canvas>
+	<script>
+		var canvas = document.getElementById('universe');
+		var ctx = canvas.getContext('2d');
+		var id = ctx.createImageData(1,1);
+		var d  = id.data;
+		d[0]   = 0; 	//R
+		d[1]   = 0;		//G
+		d[2]   = 0;		//B
+		d[3]   = 255;	//A
+		mandelbrot(ctx,id);  
+	</script>
+</html>
