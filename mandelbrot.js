@@ -61,20 +61,24 @@ function draw(ctx,id,x,y)
 	ctx.putImageData(id,x,y);
 }*/
 
-function mandelbrot(ctx, id)
+function mandelbrot(ctx, id, xmin, xmax, ymin, ymax)
 {
-	var xmin = -2;
-	var xmax = 0.8;
-	var lenx = (Math.sqrt(xmin*xmin)+xmax)/500;
-	var leny = 0.004;
+	var lenx = (Math.sqrt(xmin*xmin)+Math.sqrt(xmax*xmax))/500;
+	var leny = (Math.sqrt(ymin*ymin)+Math.sqrt(ymax*ymax))/500;
+	var bxmin = Math.sqrt(xmin*xmin);
+	var bymin = Math.sqrt(ymin*ymin);
+	var xfacktor = 0;
+	var yfacktor = 0;
+	if (xmin < 0) xfacktor = bxmin;
+	if (ymin < 0) yfacktor = bymin;
 	var px = 0;
 	var py = 0;
 	console.log(lenx);
 	for (var x = xmin; x < xmax; x += lenx) {
-		var px = (x+2)/lenx;
-		for (var y = -1; y < 1; y += 0.004) {
+		px = (x+xfacktor)/lenx;
+		for (var y = ymin; y < ymax; y += leny) {
 			a = new complex(x,y);
-			py = (y+1)/leny;
+			py = (y+yfacktor)/leny;
 			if (iter(a)) ctx.putImageData(id,px,py);
 		}
 	}
