@@ -35,6 +35,7 @@ function iter(c)
 	return true;
 }
 
+/*
 function plot(ctx,id,i,c)
 {
 	// i == -3 -> x=0
@@ -47,12 +48,34 @@ function plot(ctx,id,i,c)
 	ctx.putImageData(id,i,c);
 }
 
+function draw(ctx,id,x,y)
+{
+	// viewport x: -2 <-> 0.8
+	// viewport y: -1 <-> 1
+	// len x: 0.8 - -2 = 2.8 ==> 2.8/500px = 0.0056/px
+	// len y: 1 - -1 = 2 ==> 2/500px = 0.004/px
+	//var lenx = 0.0076;
+	var leny = 0.004;
+	//x = (x+2)/lenx;
+	y = (y+1)/leny;
+	ctx.putImageData(id,x,y);
+}*/
+
 function mandelbrot(ctx, id)
 {
-	for (var x = -3; x < 0.8; x = x+0.005) {
-		for (var y = -1; y < 1; y = y+0.005) {
+	var xmin = -2;
+	var xmax = 0.8;
+	var lenx = (Math.sqrt(xmin*xmin)+xmax)/500;
+	var leny = 0.004;
+	var px = 0;
+	var py = 0;
+	console.log(lenx);
+	for (var x = xmin; x < xmax; x += lenx) {
+		var px = (x+2)/lenx;
+		for (var y = -1; y < 1; y += 0.004) {
 			a = new complex(x,y);
-			if (iter(a)) plot(ctx,id,x,y);
+			py = (y+1)/leny;
+			if (iter(a)) ctx.putImageData(id,px,py);
 		}
 	}
 }
