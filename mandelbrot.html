@@ -11,7 +11,7 @@
 	<script>
 		var canvas = document.getElementById('universe');
 		var ctx = canvas.getContext('2d');
-		var id = ctx.createImageData(1,1);
+		var id = ctx.createImageData(canvas.width, canvas.height);
 		var d  = id.data;
 		d[0]   = 0; 	//R
 		d[1]   = 0;		//G
