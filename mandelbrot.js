@@ -52,7 +52,7 @@
 function iter(c)
 {
 	z = new Complex(0,0);
-	for (var i = 0; i < 20; i++) {
+	for (var i = 0; i < document.getElementById("iterations").value; i++) {
 		z = c.add(z.pow(2));
 		z = c.add(z.pow(2));
 		if ((z.re*z.re + z.im*z.im) > 4) return false;

@@ -7,7 +7,11 @@
 		<script src="mandelbrot.js"></script>
 	</head>
 	<h1>Mandelbrot</h1>
-	<canvas id="universe" width="500" height="500"></canvas>
+	<canvas id="universe" width="500" height="500"></canvas><p>
+	Iterations:
+	<input type="range" id="iterations" name="interation" value="18"><div id="its"></div>
+	<p>
+
 	<script>
 		var canvas = document.getElementById('universe');
 		var ctx = canvas.getContext('2d');
@@ -18,5 +22,19 @@
 		d[2]   = 0;		//B
 		d[3]   = 255;	//A
 		mandelbrot(ctx,id,-1.5,0.6,-1,1);  
+		function calc(){
+			ctx.clearRect(0, 0, canvas.width, canvas.height);
+			id = ctx.createImageData(canvas.width, canvas.height);
+			mandelbrot(ctx,id,-1.5,0.6,-1,1);  
+			console.log("ok.");
+		}
+
+		function input(){
+			document.getElementById("its").innerHTML = document.getElementById("iterations").value;
+		}
+		var loop = setInterval("input()",70);
 	</script>
+	Re-Calc:
+	<button onclick="calc()">Try it</button>
+	<p>
 </html>
